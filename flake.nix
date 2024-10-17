@@ -13,32 +13,17 @@
 
         packaged-python = pkgs.python3.withPackages (p: with p; [
           # Examples
-          # pyyaml
-          requests
-          pyppeteer
-          # scrapy
-          selenium
-          webdriver-manager
-          matplotlib
-          numpy
-          # (
-            # buildPythonPackage rec {
-              # pname = "deserialize";
-              # version = "1.8.3";
-              # src = fetchPypi {
-                # inherit pname version;
-                # sha256 = "sha256-0aozmQ4Eb5zL4rtNHSFjEynfObUkYlid1PgMDVmRkwY=";
-              # };
-              # doCheck = false;
-              # buildInputs = []; # pkgs deps
-              # nativeBuildInputs = []; # pkgs deps
-              # propagatedBuildInputs = []; # python deps
-            # }
-          # )
+          # requests
+          # selenium
+          # webdriver-manager
         ]);
 
       in {
-        packages = { };
+        packages = {
+          # default = pkgs.runCommand "main" { FILE = ./main.py; } ''
+          #   ${packaged-python}/bin/python $FILE
+          # '';
+        };
         apps = { };
 
         devShells.default =
@@ -46,8 +31,9 @@
             name = "Python Shell";
             packages = [
               packaged-python
-              pkgs.nix-init
-              pkgs.sqlite-web
+              # pkgs.nix-init
+              # pkgs.sqlite-web
+              pkgs.python3Packages.pip
             ];
           };
       }
