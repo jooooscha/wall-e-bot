@@ -4,10 +4,16 @@ from time import sleep
 import os
 import sys
 
+content = None
+with open(sys.argv[1]) as file:
+    content = file.read()
+
+if content is None:
+    exit(f"Could not read access token file from {sys.argv[1]}")
 creds = botlib.Creds(
     homeserver="https://matrix.serwm.com",
     username="wall-e",
-    access_token=sys.argv[1],
+    access_token=content,
 )
 config = botlib.Config()
 config.join_on_invite = True
