@@ -2,15 +2,12 @@ import simplematrixbotlib as botlib
 from app.bot_helper import *
 from time import sleep
 import os
-from dotenv import load_dotenv
 import sys
-
-load_dotenv(sys.argv[1])
 
 creds = botlib.Creds(
     homeserver="https://matrix.serwm.com",
     username="wall-e",
-    access_token=os.getenv('ACCESS_TOKEN'),
+    access_token=sys.argv[1],
 )
 config = botlib.Config()
 config.join_on_invite = True
