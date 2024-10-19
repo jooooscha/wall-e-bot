@@ -6,11 +6,11 @@ import tempfile
 from collections import defaultdict
 import asyncio
 
-import bot
+import app.bot
 
 
 def main():
-    bot.start_bot()
+    app.bot.start_bot()
 
 if __name__ == "__main__":
     main()
