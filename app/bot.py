@@ -5,15 +5,22 @@ import os
 import sys
 
 content = None
-with open(sys.argv[1]) as file:
+with open(sys.argv[1], "r") as file:
     content = file.read()
 
 if content is None:
     exit(f"Could not read access token file from {sys.argv[1]}")
+
+session_path = "/run/wall-e"
+if not os.path.exists(session_path):
+    os.makedirs(session_path)
+
+print(content)
 creds = botlib.Creds(
     homeserver="https://matrix.serwm.com",
     username="wall-e",
     access_token=content,
+    session_stored_file=session_path
 )
 config = botlib.Config()
 config.join_on_invite = True
