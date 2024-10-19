@@ -20,7 +20,7 @@ creds = botlib.Creds(
     homeserver="https://matrix.serwm.com",
     username="wall-e",
     access_token=content,
-    session_stored_file=session_path
+    session_stored_file=os.path.join(session_path, "session.txt")
 )
 config = botlib.Config()
 config.join_on_invite = True
