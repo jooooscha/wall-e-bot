@@ -15,11 +15,10 @@ session_path = "/run/wall-e"
 if not os.path.exists(session_path):
     os.makedirs(session_path)
 
-print(content)
 creds = botlib.Creds(
     homeserver="https://matrix.serwm.com",
     username="wall-e",
-    access_token=content,
+    password=content,
     session_stored_file=os.path.join(session_path, "session.txt")
 )
 config = botlib.Config()
