@@ -47,14 +47,14 @@ buildPythonPackage rec {
     python-olm
   ];
 
-  optional-dependencies = {
-    e2e = [
-      atomicwrites
-      cachetools
-      peewee
-      python-olm
-    ];
-  };
+  # optional-dependencies = { # included in dependencies because I don't know how to activate optional-dependencies
+  #   e2e = [
+  #     atomicwrites
+  #     cachetools
+  #     peewee
+  #     python-olm
+  #   ];
+  # };
 
   # pythonImportsCheck = [
   #   "matrix_nio"
