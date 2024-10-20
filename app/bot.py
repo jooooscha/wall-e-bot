@@ -1,8 +1,9 @@
 import simplematrixbotlib as botlib
 from app.bot_helper import *
-from time import sleep
 import os
 import sys
+from threading import Thread
+import asyncio
 
 content = None
 with open(sys.argv[1], "r") as file:
@@ -32,35 +33,27 @@ PREFIX = '!'
 
 @bot.listener.on_startup
 async def reminder(room_id):
-    print(f"Wall-e is in room: {room_id}")
+    if room_id == "!MmHaghHMbAZbNLCdCF:serwm.com":
+        print(f"Starting reminder for room: {room_id}")
+        await reminder_thread(bot)
 
-    # only run in this one room:
-    if room_id == "!SbqqbJBFSbDmSzMjIk:serwm.com":
-        while True:
-            # sleep until next notification
-            t_wait, t_target = seconds_to_next_notification()
-            print(f"Waiting {t_wait.total_seconds()}, until {t_target.strftime('%d.%m %H:%M')}")
-            sleep(t_wait.total_seconds())
+#  @bot.listener.on_message_event
+#  async def info(room, message):
 
-            await send_event_info(room_id)
+#      match = botlib.MessageMatch(room, message, bot, PREFIX)
 
-@bot.listener.on_message_event
-async def info(room, message):
+#      if match.is_not_from_this_bot() and match.prefix() and match.command("info"):
+#          print(f"Fetching info ({room.room_id})")
+#          await bot.api.send_text_message(room.room_id, "Fetching info. Please wait...")
+#          await send_event_info(bot, room.room_id)
 
-    match = botlib.MessageMatch(room, message, bot, PREFIX)
+#  @bot.listener.on_message_event
+#  async def echo(room, message):
 
-    if match.is_not_from_this_bot() and match.prefix() and match.command("info"):
-        print(f"Fetching info ({room.room_id})")
-        await bot.api.send_text_message(room.room_id, "Fetching info. Please wait...")
-        await send_event_info(room.room_id)
+#      match = botlib.MessageMatch(room, message, bot, PREFIX)
 
-@bot.listener.on_message_event
-async def echo(room, message):
-
-    match = botlib.MessageMatch(room, message, bot, PREFIX)
-
-    if match.is_not_from_this_bot() and match.prefix() and match.command("ping"):
-        await bot.api.send_text_message(room.room_id, "pong")
+#      if match.is_not_from_this_bot() and match.prefix() and match.command("ping"):
+#          await bot.api.send_text_message(room.room_id, "pong")
 
 def start_bot():
     bot.run()
