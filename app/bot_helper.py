@@ -60,7 +60,7 @@ def format_msg(event_info):
     text = f"""
 🏐🏐 Volleyball 🏐🏐
 
-Date: {event_info["date"]}
+Date: {event_info["date"]} at {event_info["time"]}
 Type: {event_info["title"]}
 Bisher haben {event_info["n_zusage"]} zugesagt und {event_info["n_absage"]} abgesagt. ({event_info["n_unsicher"]} unsicher)
 

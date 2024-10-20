@@ -33,6 +33,7 @@ class Card:
     def __init__(self, driver, card):
         self.driver = driver
         self.date = card.find_element(By.XPATH, './/div[@class="panel-heading-info"]')
+        self.time = card.find_element(By.XPATH, './/div[@class="event-time-value"]')
         self.title = card.find_element(By.XPATH, './/div[@class="panel-heading-text"]')
         self.button_zusage = card.find_element(By.XPATH, './/button[contains(@class, "participation-button") and @title="Zugesagt"]')
         self.n_zusage = self.button_zusage.find_element(By.XPATH, './/div[@class="participation-number"]')
@@ -65,6 +66,7 @@ class Card:
     def info(self):
         return {
             "date": self.date.text.replace("\n", " "),
+            "time": self.time.text,
             "title": self.title.text,
             "n_zusage": self.n_zusage.text,
             "n_unsicher": self.n_unsicher.text,
