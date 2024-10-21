@@ -35,53 +35,19 @@
           ];
         };
 
-        python-cryptography-fernet-wrapper = pkgs.callPackage ./deps/python-cryptography-fernet-wrapper.nix {
-          inherit (pkgs.python3Packages)
-            cryptography
-            setuptools
-            wheel
-            buildPythonPackage;
-        };
+        callPackage = pkgs.lib.callPackageWith (pkgs // pkgs.python3Packages);
+        python = pkgs.python3;
 
-        aiohttp-socks-0-8-4 = pkgs.callPackage ./deps/aiohttp-socks-0-8-4.nix {
-          inherit (pkgs.python3Packages)
-            buildPythonPackage
-            wheel
-            setuptools
-            python-socks
-            aiohttp;
-        };
-
-        matrix-nio-0-24-0 = pkgs.callPackage ./deps/matrix-nio-0-24-0.nix {
+        python-cryptography-fernet-wrapper = callPackage ./deps/python-cryptography-fernet-wrapper.nix { };
+        aiohttp-socks-0-8-4 = callPackage ./deps/aiohttp-socks-0-8-4.nix { };
+        matrix-nio-0-24-0 = callPackage ./deps/matrix-nio-0-24-0.nix {
           aiohttp-socks = aiohttp-socks-0-8-4;
-          inherit (pkgs.python3Packages)
-            aiofiles
-            atomicwrites
-            buildPythonPackage
-            cachetools
-            h11
-            h2
-            jsonschema
-            peewee
-            poetry-core
-            pycryptodome
-            python-olm
-            unpaddedbase64
-            aiohttp;
         };
 
-        simplematrixbotlib = pkgs.callPackage ./deps/simplematrixbotlib.nix {
+        simplematrixbotlib = callPackage ./deps/simplematrixbotlib.nix {
           inherit python-cryptography-fernet-wrapper;
           matrix-nio = matrix-nio-0-24-0;
-          inherit (pkgs.python3Packages)
-            markdown
-            pillow
-            poetry-core
-            toml
-            buildPythonPackage;
         };
-
-        python = pkgs.python3;
 
       in
       {
