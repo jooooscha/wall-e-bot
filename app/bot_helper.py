@@ -13,7 +13,7 @@ async def reminder_thread(bot):
     while True:
         # sleep until next notification
         t_wait, t_target = seconds_to_next_notification()
-        print(f"Waiting {t_wait.total_seconds()}, until {t_target.strftime('%d.%m %H:%M')}")
+        print(f"Waiting {t_wait.total_seconds()}, until {t_target.strftime('%d.%m %H:%M')}", flush=True)
         sleep(t_wait.total_seconds())
 
         await send_event_info(bot, ROOM_ID)

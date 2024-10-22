@@ -75,7 +75,7 @@
           # Pass attributes to buildPythonPackage.
             # Here is a good spot to add on any missing or custom attributes.
           python.pkgs.buildPythonPackage (attrs // {
-            env.PYTHONUNBUFFERED = "1";
+            env.PYTHONUNBUFFERED = "1"; # needed for print() to be shown in systemd
           });
       }
     );

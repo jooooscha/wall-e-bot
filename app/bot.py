@@ -35,7 +35,7 @@ PREFIX = '!'
 @bot.listener.on_startup
 async def reminder(room_id):
     if room_id == ROOM_ID:
-        print(f"Starting reminder for room: {room_id}")
+        print(f"Starting reminder for room: {room_id}", flush=True)
         await reminder_thread(bot)
 
 #  @bot.listener.on_message_event
