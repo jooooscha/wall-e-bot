@@ -4,3 +4,4 @@ __pycache__
 session.txt
 store
 .env
+run/wall_e
