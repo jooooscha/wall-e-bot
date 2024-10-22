@@ -75,7 +75,7 @@
           # Pass attributes to buildPythonPackage.
             # Here is a good spot to add on any missing or custom attributes.
           python.pkgs.buildPythonPackage (attrs // {
-            env.CUSTOM_ENVVAR = "hello";
+            env.PYTHONUNBUFFERED = "1";
           });
       }
     );
