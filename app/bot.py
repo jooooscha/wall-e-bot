@@ -2,8 +2,8 @@ import simplematrixbotlib as botlib
 from app.bot_helper import *
 import os
 import sys
-from threading import Thread
-import asyncio
+
+STORE_DIR = "/run/wall_e"
 
 content = None
 with open(sys.argv[1], "r") as file:
@@ -12,28 +12,29 @@ with open(sys.argv[1], "r") as file:
 if content is None:
     exit(f"Could not read access token file from {sys.argv[1]}")
 
-session_path = "/run/wall-e"
-if not os.path.exists(session_path):
-    os.makedirs(session_path)
+#  session_path = "/run/wall-e"
+if not os.path.exists(STORE_DIR):
+    os.makedirs(STORE_DIR)
 
 creds = botlib.Creds(
     homeserver="https://matrix.serwm.com",
     username="wall-e",
     password=content,
-    session_stored_file=os.path.join(session_path, "session.txt")
+    session_stored_file=os.path.join(STORE_DIR, "session.txt")
 )
 config = botlib.Config()
 config.join_on_invite = True
 config.encryption_enabled = True
 config.emoji_verify = True
 config.ignore_unverified_devices = True
+config.store_path = STORE_DIR
 
 bot = botlib.Bot(creds, config)
 PREFIX = '!'
 
 @bot.listener.on_startup
 async def reminder(room_id):
-    if room_id == "!MmHaghHMbAZbNLCdCF:serwm.com":
+    if room_id == ROOM_ID:
         print(f"Starting reminder for room: {room_id}")
         await reminder_thread(bot)
 

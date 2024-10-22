@@ -3,6 +3,9 @@ from app import spielerplus
 #  from asyncio import sleep
 from time import sleep
 
+ROOM_ID = "!MmHaghHMbAZbNLCdCF:serwm.com"
+#  ROOM_ID = "!MCJfWEYIUAbLgyFEvj:serwm.com"
+
 async def reminder_thread(bot):
     """ Waits until next 'date' and sends calls send_event_info """
     # only run in this one room:
@@ -13,7 +16,7 @@ async def reminder_thread(bot):
         print(f"Waiting {t_wait.total_seconds()}, until {t_target.strftime('%d.%m %H:%M')}")
         sleep(t_wait.total_seconds())
 
-        await send_event_info(bot, room_id)
+        await send_event_info(bot, ROOM_ID)
 
 async def send_event_info(bot, room_id):
     """ Fetches data from spielerplus and sends it to the room with id 'room_id' """
