@@ -3,8 +3,8 @@ from app import spielerplus
 #  from asyncio import sleep
 from time import sleep
 
-ROOM_ID = "!MmHaghHMbAZbNLCdCF:serwm.com"
-#  ROOM_ID = "!MCJfWEYIUAbLgyFEvj:serwm.com"
+#  ROOM_ID = "!MmHaghHMbAZbNLCdCF:serwm.com"
+ROOM_ID = "!MCJfWEYIUAbLgyFEvj:serwm.com"
 
 async def reminder_thread(bot):
     """ Waits until next 'date' and sends calls send_event_info """
